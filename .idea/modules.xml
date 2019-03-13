@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/ML2hibernate.iml" filepath="$PROJECT_DIR$/ML2hibernate.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ML2.iml" filepath="$PROJECT_DIR$/ML2.iml" />
     </modules>
   </component>
 </project>
