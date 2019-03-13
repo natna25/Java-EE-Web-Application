@@ -1,0 +1,13 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="ML2hibernate:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/ML2hibernate_war_exploded</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="ML2hibernate/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="ML2hibernate" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>
