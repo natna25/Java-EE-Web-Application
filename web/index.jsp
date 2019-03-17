@@ -11,6 +11,7 @@
     <title>$Title$</title>
   </head>
   <body>
+  <a href="/ML2_war_exploded/login">go to login page</a>
   $END$
   </body>
 </html>
