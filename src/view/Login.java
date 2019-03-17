@@ -10,8 +10,8 @@ public class Login{
     public String getLoginPage(){
         String pageCode = "<form action='WebApp' method='POST'> \n" +
                 "Username : <input type='text' name='username'/>\n"+
-                "Password : <input type'password' name='password'/>\n" +
-                "Password : <input type'password' name='confirm-password'/>\n" +
+                "Password : <input type='password' name='password'/>\n" +
+                "Password : <input type='password' name='confirm-password'/>\n" +
                 "<input type='submit' name='form_btn' value='Log-in' />\n" +
                 "<input type='submit' name='form_btn' value='Sign-up' />\n" +
                 "</form>";

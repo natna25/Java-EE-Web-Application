@@ -1,6 +1,7 @@
 package controller;
 
 import model.User;
+import model.UserHandler;
 import view.Login;
 
 import javax.servlet.*;
@@ -21,6 +22,11 @@ import java.util.Enumeration;
 @WebServlet(name="webapp",urlPatterns = {"/WebApp"})
 public class RequestHandler  extends HttpServlet{
 
+    private UserHandler userhandler;
+
+    public void init(){
+        userhandler = new UserHandler();
+    }
     // get function that will handle the first request for the login page
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse response) throws ServletException, IOException {
@@ -69,7 +75,10 @@ public class RequestHandler  extends HttpServlet{
                             //then user entered the same password in both inputs, he can be persisted in database
                             User newUser = new User(req.getParameter("username"),req.getParameter("password"));
                             newUser.setSign_up_date(new Date()); //will also store current date
-                            //TODO: add function from userHandler class that will persist obj into db
+                            if(userhandler.createUser(newUser)){
+                                out.println("successfully entered new user");
+                            }
+
                         }else out.println("passwords not matching");
                     }else out.println("please enter a valid email as a username");
 
