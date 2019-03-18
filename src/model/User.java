@@ -36,6 +36,9 @@ public class User {
     private Date last_sign_in;
     private Date last_access;
 
+    public User() {
+    }
+
     public User(String mail, String password) {
         this.mail = mail;
         this.password = password;
@@ -89,5 +92,12 @@ public class User {
 
     public void setLast_access(Date last_access) {
         this.last_access = last_access;
+    }
+
+    public void updateLoginTme(){
+        this.last_sign_in = new Date();
+    }
+    public void updateAccessTime(){
+        this.last_access = new Date();
     }
 }

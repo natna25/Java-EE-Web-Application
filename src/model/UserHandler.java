@@ -4,10 +4,11 @@ import org.hibernate.*;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
+import java.util.List;
+
 public class UserHandler {
 
     private static final SessionFactory factory;
-
     /**
      * static method that is executed once at the begining of the JVM, this is used to
      * make the necessary calls on hibernate in order to set up our database
@@ -26,8 +27,6 @@ public class UserHandler {
         }
     }
 
-    public UserHandler() {
-    }
     //methods to add new users, check user credentials, delete user and update their account info
 
     /*
@@ -54,11 +53,28 @@ public class UserHandler {
     /**
      *  finds a user based on his username
      */
-    public User getUser(String username){
+    public User getUser(String mail){
         Transaction transaction = null;
         try (Session session = factory.openSession()) {
             transaction = session.beginTransaction();
-            User user = session.get(User.class, username);
+            List users = session.createQuery(String.format("FROM User WHERE mail='%s'", mail)).list();
+            //User user = session.get(User.class, mail);
+            transaction.commit();
+            return (User) users.get(0);
+        } catch (HibernateException e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+            return null;
+        }
+    }
+    public User getUserbyID(int id){
+        Transaction transaction = null;
+        try (Session session = factory.openSession()) {
+            transaction = session.beginTransaction();
+
+            User user = session.get(User.class, id);
             transaction.commit();
             return user;
         } catch (HibernateException e) {
@@ -80,6 +96,27 @@ public class UserHandler {
         try (Session session = factory.openSession()) {
             transaction = session.beginTransaction();
             session.update(user);
+            transaction.commit();
+            return true;
+        } catch (HibernateException e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    /**
+     * deletes specific user from db
+     * @param user
+     * @return
+     */
+    public static boolean deleteUser(User user) {
+        Transaction transaction = null;
+        try (Session session = factory.openSession()) {
+            transaction = session.beginTransaction();
+            session.delete(user);
             transaction.commit();
             return true;
         } catch (HibernateException e) {
